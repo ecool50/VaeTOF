@@ -1,0 +1,10 @@
+Package: VaeTOF
+Type: Package
+Title: A package for clinical prediction in high parameter cytometry
+Version: 0.1.0
+Author: Elijah Willie
+Maintainer: ewillie0004@gmail.com
+Description: This package combines deep learning with hierarchical group lasso for predicting clinical outcomes
+License: MIT
+Encoding: UTF-8
+LazyData: true
