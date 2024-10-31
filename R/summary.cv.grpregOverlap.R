@@ -1,14 +1,11 @@
-## function: summary cv.grpregOverlap, need revise
+## function: summary cv.grpregOverlap
+## function was obtained from https://github.com/YaohuiZeng/grpregOverlap with some minor modifications
 # ------------------------------------------------------------------------------
 summary.cv.grpregOverlap <- function(object, ...) {
     obj.new <- object
-    if (object$fit$family != 'cox') {
-      class(obj.new) <- 'cv.grpreg'
-    } else {
-      class(obj.new) <- 'cv.grpsurv'
-    }
+    class(obj.new) <- 'cv.grpreg'
     res <- summary(obj.new, ...)
-   
+
     nvars.latent <- predict(object$fit, type="nvars", latent = T)
     res$nvars.latent <- nvars.latent
     d.latent <- dim(object$fit$beta.latent)
@@ -24,6 +21,7 @@ summary.cv.grpregOverlap <- function(object, ...) {
 # -------------------------------------------------------------------------------
 
 ## function: print summary.cv.grpregOverlap
+## function was obtained from https://github.com/YaohuiZeng/grpregOverlap with some minor modifications
 # -------------------------------------------------------------------------------
 print.summary.cv.grpregOverlap <- function(x, digits, ...) {
     if (missing(digits)) {
@@ -36,11 +34,11 @@ print.summary.cv.grpregOverlap <- function(x, digits, ...) {
     cat("      'p.latent' is the number of latent variables!\n")
     cat("---------------------------------------------------------------\n")
     if (length(x$d)==3) {
-        cat(x$penalty, "-penalized multivariate ", x$model, 
-            " regression with m=", x$d[1], ", n=", x$n/x$d[1], ", p=", x$p, 
+        cat(x$penalty, "-penalized multivariate ", x$model,
+            " regression with m=", x$d[1], ", n=", x$n/x$d[1], ", p=", x$p,
             " (p.latent=", x$p.latent, ")", "\n", sep="")
     } else {
-        cat(x$penalty, "-penalized ", x$model, " regression with n=", x$n, 
+        cat(x$penalty, "-penalized ", x$model, " regression with n=", x$n,
             ", p=", x$p, " (p.latent=", x$p.latent, ")", "\n", sep="")
     }
     cat("At minimum cross-validation error (lambda=", formatC(x$lambda[x$min], digits[2], format="f"), "):\n", sep="")
@@ -48,18 +46,18 @@ print.summary.cv.grpregOverlap <- function(x, digits, ...) {
     cat("  Nonzero        coefficients: ", x$nvars[x$min], "\n", sep="")
     cat("  Nonzero latent coefficients: ", x$nvars.latent[x$min], "\n", sep="")
     cat("  Nonzero groups: ", x$ngroups[x$min], "\n", sep="")
-    cat("  Cross-validation error of ", 
+    cat("  Cross-validation error of ",
         formatC(min(x$cve), digits[1], format="f"), "\n", sep="")
-    cat("  Maximum R-squared: ", 
+    cat("  Maximum R-squared: ",
         formatC(max(x$r.squared), digits[3], format="f"), "\n", sep="")
-    cat("  Maximum signal-to-noise ratio: ", 
+    cat("  Maximum signal-to-noise ratio: ",
         formatC(max(x$snr), digits[4], format="f"), "\n", sep="")
     if (x$model == "logistic") {
-        cat("  Prediction error at lambda.min: ", 
+        cat("  Prediction error at lambda.min: ",
             formatC(x$pe[x$min], digits[5], format="f"), "\n", sep="")
     }
     if (x$model == "linear") {
-        cat("  Scale estimate (sigma) at lambda.min: ", 
+        cat("  Scale estimate (sigma) at lambda.min: ",
             formatC(sqrt(x$cve[x$min]), digits[5], format="f"), "\n", sep="")
     }
 }

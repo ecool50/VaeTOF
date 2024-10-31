@@ -1,7 +1,8 @@
 
 ## function: overlap matrix c[i,j] = # of overlaps between group i and j.
-##           Diagonals are group size. Provide interface for user to check 
+##           Diagonals are group size. Provide interface for user to check
 ##           overlapping structure.
+## function was obtained from https://github.com/YaohuiZeng/grpregOverlap with some minor modifications
 # ------------------------------------------------------------------------------
 overlapMatrix <- function(X, group) {
   inc.mat <- incidenceMatrix(X, group)
@@ -11,6 +12,7 @@ overlapMatrix <- function(X, group) {
 # ------------------------------------------------------------------------------
 
 ## function: incidence matrix: I[i, j] = 1 if group i contains variable j.
+## function was obtained from https://github.com/YaohuiZeng/grpregOverlap with some minor modifications
 # ------------------------------------------------------------------------------
 incidenceMatrix <- function(X, group) {
   n <- nrow(X)
@@ -19,16 +21,16 @@ incidenceMatrix <- function(X, group) {
     stop("Argument 'group' must be a list of integer indices or character names of variables!")
   }
   J <- length(group)
-  grp.mat <- Matrix(0, nrow = J, ncol = p, sparse = TRUE, 
+  grp.mat <- Matrix(0, nrow = J, ncol = p, sparse = TRUE,
                     dimnames=list(as.character(rep(NA, J)),
-                                  as.character(rep(NA, p))))    
+                                  as.character(rep(NA, p))))
   if(is.null(colnames(X))) {
-    colnames(X) <- paste("V", 1:ncol(X), sep="")    
+    colnames(X) <- paste("V", 1:ncol(X), sep="")
   }
   if (is.null(names(group))) {
     names(group) <- paste("grp", 1:J, sep="")
   }
-  
+
   if (is.numeric(group[[1]])) {
     for (i in 1:J) {
       ind <- group[[i]]

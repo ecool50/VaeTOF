@@ -1,5 +1,6 @@
 
 ## function: predict cv.grpregOverlap
+## function was obtained from https://github.com/YaohuiZeng/grpregOverlap with some minor modifications
 # -------------------------------------------------------------------------------
 predict.cv.grpregOverlap <- function(object, X, type=c("link", "response", "class", "coefficients", "vars", "groups", "nvars", "ngroups", "norm"),
                                       latent = FALSE, lambda = object$lambda.min,
