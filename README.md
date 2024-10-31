@@ -13,7 +13,7 @@ We also provide functions for model visualisation and interpretation.
 
 Installation
 --------
-
+Before installing this package, [tensorflow](https://tensorflow.rstudio.com) and [keras](https://keras.rstudio.com) must be installed in Python and connected to R .
 ### Submitting an issue or feature request
 
 `VaeTOF` is still under active development. We would greatly appreciate any and 
